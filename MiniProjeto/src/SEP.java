@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class SEP {
+	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 
@@ -13,13 +14,34 @@ public class SEP {
 		double vetor_renda_total[] = new double[500];
 		int vetor_membro[] = new int[500];
 
-		double renda_bruta;
-
-		int opção = 1, opção_2 = 1, opção_3 = 3, contador_cadastro = 0, grupo_familiar,
-				confirmar_login = 1, contador_confirmar;
-		String usuário="", senha = "";
 		
+
+		//opções
+		int opção = 1, opção_2 = 1, opção_3 = 3;
+		
+		
+		//contadores
+		int contador_cadastro = 0, contador_confirmar;
+		
+		
+		//login
+		String usuário="", senha = "";
+		String continuar_p_person="";
+		
+		
+		//gastos R$
 		double água, energia, internet, alimentação, cartão_de_crédito, soma_gastos=0;
+		
+		
+		//percentuais dos gastos
+		double percentual_água, percentual_internet, percentual_alimentação,
+		percentual_energia, percentual_cartão_de_crédito, percentual_poupança;
+		
+		
+		//variáveis de salvar configuração
+		double salvar_água=0, salvar_energia=0, salvar_internet=0, salvar_alimentação=0, salvar_cartão_de_crédito=0, salvar_poupança=0;
+		
+		
 
 		do {
 
@@ -59,7 +81,7 @@ public class SEP {
 				System.out.println("Quantos membros seu grupo familiar tem? ");
 				vetor_membro[contador_cadastro] = scan.nextInt();
 				
-				System.out.println("Qual a renda total do seu grupo familiar? ");
+				System.out.println("Qual a renda total do seu grupo familiar (R$)? ");
 				vetor_renda_total[contador_cadastro] = scan.nextDouble();
 				
 				
@@ -159,41 +181,200 @@ public class SEP {
 							
 							System.out.println("PLANOS PADRÃO");
 							
-							System.out.println("Plano de economia máxima");
-							System.out.println("Plano poupança");
-							System.out.println("Plano médio");
-							System.out.println("Plano ostentação");
+							System.out.println("[1] - Plano de economia máxima");
+							
+							/*case 1:
+							 * 
+							 * 
+							 * if(valor_renda_total<=1000){
+							 * 
+							 * percentual_água = 10%;
+							 * percentual_energia=8%;
+							 * 
+							 * }else if(valor_renda_total>1000 && valor_renda_total<3000 ) {
+							 * 
+							 * percentual_água = 8%;
+							 * percentual_energia= 5%;
+							 * 
+							 * }
+							 * 
+							 * % -> salário  = R$30 ~ R$100
+							 * 0-100 -> salário = 30 [valor] 100
+							 * 
+							 * 
+							 * 
+							 *  
+							 * 
+							 * 
+							 * 
+							 * 
+							 * salvar_água = percentual_água;
+							 * 
+							 * 
+							 */
+							
+							
+							System.out.println("[2] - Plano poupança");
+							System.out.println("[3] - Plano gasto médio");
+							System.out.println("[4] - Plano alto gasto");
+							System.out.println("[0] - Voltar");
 							
 							
 							
-							
-							
+							//variavel = essa configuração
 							
 							
 							
 							
 							break;
 						case 2:
+							
+							percentual = 100;
+							
 							System.out.println("PLANO PERSONALIZADO");
+							System.out.println("Selecione o percentual desejado para cada item a seguir: ");
+							System.out.println("Por padrão do sistema, o percentual máximo é de 60%!");
 							
 							
 							
 							
+							do {
+								do {
+							System.out.println("Água: ");
+							percentual_água = scan.nextDouble();
+							if (percentual_água<0 || percentual_água>60) {
+								System.out.println("Percentual inválido, tente novamente!");
+							}
+							}while(percentual_água<0 || percentual_água>60);
+							cálculo_plano_personalizado(percentual_água);
+							}while(confirmação_p_person!=0);
 							
 							
 							
+					
+							do {
+								do {
+							System.out.println("Energia: ");
+							percentual_energia = scan.nextDouble();
+							
+							if (percentual_energia<0 || percentual_energia>60) {
+								System.out.println("Percentual inválido, tente novamente!");
+							}
+							}while(percentual_energia<0 || percentual_energia>60);
+							cálculo_plano_personalizado(percentual_energia);
+							}while(confirmação_p_person!=0);
+							
+							
+							
+							
+							do {
+								do {
+							System.out.println("Alimentação: ");
+							percentual_alimentação = scan.nextDouble();
+							
+							if (percentual_alimentação<0 || percentual_alimentação>60) {
+								System.out.println("Percentual inválido, tente novamente!");
+							}
+							}while(percentual_alimentação<0 || percentual_alimentação>60);
+							cálculo_plano_personalizado(percentual_alimentação);
+							}while(confirmação_p_person!=0);
+							
+							
+							
+							
+							do {
+								do {
+							System.out.println("Internet: ");
+							percentual_internet = scan.nextDouble();
+							
+							if (percentual_internet<0 || percentual_internet>60) {
+								System.out.println("Percentual inválido, tente novamente!");
+							}
+							}while(percentual_internet<0 || percentual_internet>60);
+							cálculo_plano_personalizado(percentual_internet);		
+							}while(confirmação_p_person!=0);
 						
+					
+							
+							
+							do {
+								do {
+							System.out.println("Cartão de crédito: ");
+							percentual_cartão_de_crédito = scan.nextDouble();
+							
+							if (percentual_cartão_de_crédito<0 || percentual_cartão_de_crédito>60) {
+								System.out.println("Percentual inválido, tente novamente!");
+							}
+							}while(percentual_cartão_de_crédito<0 || percentual_cartão_de_crédito>60);
+							cálculo_plano_personalizado(percentual_cartão_de_crédito);
+							}while(confirmação_p_person!=0);
 							
 							
 							
+							
+							do {
+								do {
+							System.out.println("Poupança: ");
+							percentual_poupança = scan.nextDouble();
+							
+							if (percentual_poupança<0 || percentual_poupança>60) {
+								System.out.println("Percentual inválido, tente novamente!");
+							}
+							}while(percentual_poupança<0 || percentual_poupança>60);
+							cálculo_plano_personalizado(percentual_poupança);
+							}while(confirmação_p_person!=0);
+							
+							
+							
+							
+							
+							System.out.println("Configuração do plano: \n");
+							System.out.println("Água: "+percentual_água+"%");
+							System.out.println("Energia: "+percentual_energia+"%");
+							System.out.println("Alimentação: "+percentual_alimentação+"%");
+							System.out.println("Internet: "+percentual_internet+"%");
+							System.out.println("Cartão de crédito: "+percentual_cartão_de_crédito+"%");
+							System.out.println("Poupança: "+percentual_poupança+"% \n");
+							
+							
+							System.out.println("Continuar? (S/N)");
+							continuar_p_person = scan.next();
+							
+							//////////////////////////////////
+							
+							
+							//SWITCH de confirmação de plano
+							switch (continuar_p_person) {
+							case "S":
+								
+								//salvar_configuração();
+								
+								
+								salvar_água=percentual_água; salvar_alimentação=percentual_alimentação;
+								salvar_cartão_de_crédito=percentual_cartão_de_crédito; salvar_energia=percentual_energia;
+								salvar_internet=percentual_internet; salvar_poupança=percentual_poupança;
+								
+								
+								break;
+							case "N":
+								percentual_água=salvar_água; percentual_energia=salvar_energia; 
+								percentual_alimentação=salvar_alimentação;
+								percentual_internet=salvar_internet; percentual_cartão_de_crédito=salvar_cartão_de_crédito;
+								percentual_poupança=salvar_poupança; break;
+								
+							default:
+									System.out.println("Opção incorreta, por favor tente novamente!");
+							}
+							//---------------------
 							
 							break;
+						
 						case 0:
-							
 							break;
 					
 						default:
 							
+							System.out.println("Opção incorreta, por favor tente novamente!");
 							break;
 						
 						}
@@ -254,4 +435,47 @@ public class SEP {
 
 	}
 
-}
+///////////////////////////// MÉTODOS //////////////////////////////////
+	
+	
+	static double percentual;
+
+	public static void cálculo_plano_personalizado (double x) {
+		
+		
+		
+			
+			if (x<=percentual) {
+			percentual = percentual-x;
+			confirmação_p_person=0;
+			System.out.println("Pontos percentuais restantes a serem distribuídos = "+percentual+"%");
+		}else {
+			confirmação_p_person=1;
+			System.out.println("valor não pode ser aceitado pois não há "
+					+ " pontos percentuais suficientes a serem distribuídos (Restam "+percentual+"%)");
+		
+		}
+	}
+	
+	static int confirmação_p_person=1;
+	
+	public static void salvar_configuração(){
+		
+		/*salvar_água=percentual_água; salvar_alimentação=percentual_alimentação;
+		salvar_cartão_de_crédito=percentual_cartão_de_crédito; salvar_energia=percentual_energia;
+		salvar_internet=percentual_internet; salvar_poupança=percentual_poupança;
+		 */
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
