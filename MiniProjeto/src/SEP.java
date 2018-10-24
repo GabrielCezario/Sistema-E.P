@@ -21,7 +21,7 @@ public class SEP {
 		
 		
 		//contadores
-		int contador_cadastro = 0, contador_confirmar;
+		int contador_cadastro = 0, contador_confirmar, confirmar=0;
 		
 		
 		//login
@@ -51,6 +51,7 @@ public class SEP {
 			System.out.println("");
 			System.out.println("[1] - Realizar Cadastro");
 			System.out.println("[2] - Login");
+			System.out.println("[3] - Descrição");
 			System.out.println("[0] - Finalizar programa");
 			opção = scan.nextInt();
 
@@ -70,11 +71,36 @@ public class SEP {
 				System.out.println("Data de nascimento: ");
 				vetor_data[contador_cadastro] = scan.next();
 
-
+				
+				do {
+					
+				confirmar=0;
+					
 				System.out.println("Nome de usuário: ");
 				vetor_usuário[contador_cadastro] = scan.next();
-	
-	
+				
+				
+				for (int i = 0; i < contador_cadastro; i++) {
+					
+					
+					if (vetor_usuário[i].equalsIgnoreCase(vetor_usuário[contador_cadastro])) {
+						
+						confirmar++;
+						
+					}
+				}
+				
+				
+				if (confirmar>=1) {
+					
+					System.out.println("Usuário já cadastrado, tente outro nome de usuário!");
+				}
+				
+				
+				
+				}while(confirmar!=0);
+				//---------------------
+				
 				System.out.println("Senha: ");
 				vetor_senha[contador_cadastro] = scan.next();
 				
@@ -90,6 +116,8 @@ public class SEP {
 				
 
 				contador_cadastro++;
+				
+	
 				// ----------
 
 				break;
@@ -124,6 +152,7 @@ public class SEP {
 					if (contador_confirmar != 2) {
 						System.out.println("Nome de usuário ou senha não existe/incorreto! \n");
 					}
+					
 				} while (contador_confirmar != 2);
 				// ----------
 
