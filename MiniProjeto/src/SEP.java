@@ -1,3 +1,4 @@
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class SEP {
@@ -6,73 +7,92 @@ public class SEP {
 		Scanner scan = new Scanner(System.in);
 
 		// vetores
-		String vetor_nome[] = new String[500];
-		String vetor_data[] = new String[500];
-		String vetor_usuário[] = new String[500];
-		String vetor_senha[] = new String[500];
-		String vetor_usuário_cadastrado[] = new String[500];
-		double vetor_renda_total[] = new double[500];
-		int vetor_membro[] = new int[500];
+		String vetNome[] = new String[500];
+		String vetData[] = new String[500];
+		String vetUsuario[] = new String[500];
+		String vetSenha[] = new String[500];
+		float vetRendaT[] = new float[500];
+		
 
 		// opções
-		int opção = 1, opção_2 = 1, opção_3 = 3;
+		int opcao1 = 1, opcao2 = 1;
 
 		// contadores
-		int contador_cadastro = 0, contador_confirmar, confirmar = 0, usuário_salário=0;
+		int contCadastro = 0, contConfirmar, confirmar = 0, usuarioPosicao = 0;
 
 		// login
-		String usuário = "", senha = "";
-		String continuar_p_person = "";
+		String usuario = "", senha = "", voltar;
+		String continuarPlanoPers = "";
 
 		// gastos R$
-		double água, energia, internet, alimentação, cartão_de_crédito, soma_gastos = 0;
+		float vAgua, vEnergia, vInternet, vAlimentacao, vCredCard, vPoupanca, vTotal= 0;
 
 		// percentuais dos gastos
-		double percentual_água, percentual_internet, percentual_alimentação, percentual_energia,
-				percentual_cartão_de_crédito, percentual_poupança;
+		float percAgua, percInternet, percAlimentacao, percEnergia,
+				percCredCard, percPoupanca;
 
 		// variáveis de salvar configuração
-		double salvar_água = 0, salvar_energia = 0, salvar_internet = 0, salvar_alimentação = 0,
-				salvar_cartão_de_crédito = 0, salvar_poupança = 0;
+		float salvarAgua = 0, salvarEnergia = 0, salvarInternet = 0, salvarAlimentacao = 0,
+				salvarCredCard = 0, salvarPoupanca = 0;
 
+		
 		do {
 
 			// menu inicial
+			System.out.println("\n\n");
+			System.out.println(
+					"//======================================\\\\\n"
+					+"||	Sistema Econômico Pessoal	||\n"
+					+"||>====================================<||\n"
+					+"||	[1] - Realizar Cadastro		||\n"
+					+"||	[2] - Login			||\n"
+					+"||	[3] - Descrição			||\n"
+					+"||	[0] - Finalizar programa	||\n"
+					+"\\\\======================================//");
+			System.out.print("=>");
+			opcao1 = scan.nextInt();
+			
+			
 
-			System.out.println("Sistema Econômico Pessoal");
-			System.out.println("");
-			System.out.println("[1] - Realizar Cadastro");
-			System.out.println("[2] - Login");
-			System.out.println("[3] - Descrição");
-			System.out.println("[0] - Finalizar programa");
-			opção = scan.nextInt();
-
-			// ---------
-
-			switch (opção) {
+			switch (opcao1) {
 
 			case 1:
 
 				// CADASTRO PESSOAL
+				System.out.println("\n\n");
+				System.out.println(
+						 "#======================#\n"
+						+"| 	CADASTRO       |\n"
+						+"#======================#");
 
-				System.out.println("Cadastro \n \n");
+				System.out.print(
+						 "+---------------+\n"
+						+"|     Nome 	|\n"
+						+"+---------------+\n"
+						+"=>");
+				vetNome[contCadastro] = scan.next();
 
-				System.out.println("Nome: ");
-				vetor_nome[contador_cadastro] = scan.next();
-
-				System.out.println("Data de nascimento: ");
-				vetor_data[contador_cadastro] = scan.next();
+				System.out.print(
+						 "+-----------------------+\n"
+						+"|  Data de nascimento	|\n"
+						+"+-----------------------+\n"
+						+"=>");
+				vetData[contCadastro] = scan.next();
 
 				do {
 
 					confirmar = 0;
 
-					System.out.println("Nome de usuário: ");
-					vetor_usuário[contador_cadastro] = scan.next();
+					System.out.print(
+							 "+-----------------------+\n"
+							+"|  Nome de usuario 	|\n"
+							+"+-----------------------+\n"
+							+"=>");
+					vetUsuario[contCadastro] = scan.next();
 
-					for (int i = 0; i < contador_cadastro; i++) {
+					for (int i = 0; i < contCadastro; i++) {
 
-						if (vetor_usuário[i].equalsIgnoreCase(vetor_usuário[contador_cadastro])) {
+						if (vetUsuario[i].equalsIgnoreCase(vetUsuario[contCadastro])) {
 
 							confirmar++;
 
@@ -81,374 +101,618 @@ public class SEP {
 
 					if (confirmar >= 1) {
 
-						System.out.println("Usuário já cadastrado, tente outro nome de usuário!");
+						System.out.println(
+								 "#===============================================================#\n"
+								+"|	Usuário já cadastrado, tente outro nome de usuário!	|\n"
+								+"#===============================================================#");
 					}
 
 				} while (confirmar != 0);
 				// ---------------------
 
-				System.out.println("Senha: ");
-				vetor_senha[contador_cadastro] = scan.next();
+				System.out.print(
+						 "+-----------+\n"
+						+"|   Senha   |\n"
+						+"+-----------+\n"
+						+"=>");
+				vetSenha[contCadastro] = scan.next();
 
-				System.out.println("Quantos membros seu grupo familiar tem? ");
-				vetor_membro[contador_cadastro] = scan.nextInt();
 
-				System.out.println("Qual a renda total do seu grupo familiar (R$)? ");
-				vetor_renda_total[contador_cadastro] = scan.nextDouble();
+				System.out.print(
+						 "+------------------------------------------------------+\n"
+						+"|    Qual a renda total do seu grupo familiar (R$)?    |\n"
+						+"+------------------------------------------------------+\n"
+						+"=>");
+				vetRendaT[contCadastro] = scan.nextFloat();
 
-				// E.U.L.A.
+				
 
-				contador_cadastro++;
+				contCadastro++;
+				
+				
+				System.out.println(
+						 "#==============================#\n"
+						+"|	CADASTRO REALIZADO!    |\n"
+						+"#==============================#");
 
-				// ----------
+				System.out.print(
+						 "+-------------------------------------------------------+\n"
+						+"|	Tecle [ENTER] para ir ao menu principal 	|\n"
+						+"+-------------------------------------------------------+");
+				voltar = scan.nextLine();
+				voltar = scan.nextLine();
 
 				break;
 
 			case 2:
-
+				
 				// ÁREA DE LOGIN
 				do {
+				
+				do {
 
-					contador_confirmar = 0;
+					contConfirmar = 0;
 
-					System.out.println("Digite seu nome de usuário: ");
-					usuário = scan.next();
+					System.out.print(
+							 "+---------------------------------------+\n"
+							+"|	Digite seu nome de usuário	|\n"
+							+"+---------------------------------------+\n"
+							+ "=>");
+					usuario = scan.next();
 
-					System.out.println("Digite a senha: ");
+					System.out.print(
+							 "+-----------------------+\n"
+							+"|    Digite a senha	|\n"
+							+"+-----------------------+\n"
+							+"=>");
 					senha = scan.next();
 
-					for (int i = 0; i < vetor_usuário.length; i++) {
+					for (int i = 0; i < vetUsuario.length; i++) {
 
-						if (usuário.equals(vetor_usuário[i])) {
-							contador_confirmar++;
-							usuário_salário = i;
+						if (usuario.equals(vetUsuario[i])) {
+							contConfirmar++;
+							usuarioPosicao = i;
 						}
+						
+					
 					}
 
-					for (int i = 0; i < vetor_senha.length; i++) {
+					
 
-						if (senha.equals(vetor_senha[i])) {
-							contador_confirmar++;
+						if (senha.equals(vetSenha[usuarioPosicao])) {
+							contConfirmar++;
 						}
+					
+
+					if (contConfirmar != 2) {
+						
+						
+						System.out.println(
+								 "#=======================================================#\n"
+								+"|	Nome de usuário ou senha não existe/incorreto! 	|\n"
+								+"#=======================================================#\n");
+					
+					
 					}
 
-					if (contador_confirmar != 2) {
-						System.out.println("Nome de usuário ou senha não existe/incorreto! \n");
-					}
+				} while (contConfirmar != 2);
+				
 
-				} while (contador_confirmar != 2);
-				// ----------
-
+				do {
+				
 				// APÓS LOGIN
-
-				System.out.println("Olá, " + usuário + ". Bem vindo ao Sistema Econômico Pessoal!");
-				System.out.println("[1] - Ver plano configurado para seu perfil");
-				System.out.println("[2] - Criar plano personalizado");
-				System.out.println("[3] - Exibir relatório");
-				System.out.println("[0] - Voltar");
+				System.out.println("\n\n");
+				System.out.println(
+						 "//==============================================================\\\\\n"
+						+"||	Olá, " + usuario + ". Bem vindo ao Sistema Econômico Pessoal!	||\n"
+						+"||>============================================================<||\n"
+						+"||	[1] - Ver plano recomendado para seu perfil		||\n"
+						+"||	[2] - Criar plano personalizado				||\n"
+						+"||	[3] - Exibir relatório					||\n"
+						+"||	[0] - Deslogar						||\n"
+						+"\\\\==============================================================//");
+				System.out.println("=>");
 				// ------------
-				opção_2 = scan.nextInt();
+				opcao2 = scan.nextInt();
+				
+				
 
-				switch (opção_2) {
+				switch (opcao2) {
 
 				case 1:
 
-					if (vetor_renda_total[usuário_salário] <= 1000) {
+					if (vetRendaT[usuarioPosicao] <= 1000) {
 
-						salvar_água = 0.05;
-						salvar_energia = 0.07;
-						salvar_alimentação = 0.2;
-						salvar_internet = 0.1;
-						salvar_cartão_de_crédito = 0.2;
-						salvar_poupança = 0.2;
-
-					}
-					if (vetor_renda_total[usuário_salário] > 1000 && vetor_renda_total[usuário_salário] <= 2500) {
-
-						salvar_água = 0.05;
-						salvar_energia = 0.05;
-						salvar_alimentação = 0.25;
-						salvar_internet = 0.07;
-						salvar_cartão_de_crédito = 0.2;
-						salvar_poupança = 0.2;
+						salvarAgua = 0.05f;
+						salvarEnergia = 0.07f;
+						salvarAlimentacao = 0.2f;
+						salvarInternet = 0.1f;
+						salvarCredCard = 0.2f;
+						salvarPoupanca = 0.2f;
 
 					}
-					if (vetor_renda_total[usuário_salário] > 2500 && vetor_renda_total[usuário_salário] <= 5000) {
+					if (vetRendaT[usuarioPosicao] > 1000 && vetRendaT[usuarioPosicao] <= 2500) {
 
-						salvar_água = 0.04;
-						salvar_energia = 0.04;
-						salvar_alimentação = 0.2;
-						salvar_internet = 0.05;
-						salvar_cartão_de_crédito = 0.2;
-						salvar_poupança = 0.3;
-
-					}
-					if (vetor_renda_total[usuário_salário] > 5000 && vetor_renda_total[usuário_salário] <= 7500) {
-
-						salvar_água = 0.04;
-						salvar_energia = 0.06;
-						salvar_alimentação = 0.2;
-						salvar_internet = 0.05;
-						salvar_cartão_de_crédito = 0.2;
-						salvar_poupança = 0.3;
+						salvarAgua = 0.05f;
+						salvarEnergia = 0.05f;
+						salvarAlimentacao = 0.25f;
+						salvarInternet = 0.07f;
+						salvarCredCard = 0.2f;
+						salvarPoupanca = 0.2f;
 
 					}
-					if (vetor_renda_total[usuário_salário] > 7500 && vetor_renda_total[usuário_salário] <= 10000) {
+					if (vetRendaT[usuarioPosicao] > 2500 && vetRendaT[usuarioPosicao] <= 5000) {
 
-						salvar_água = 0.04;
-						salvar_energia = 0.06;
-						salvar_alimentação = 0.2;
-						salvar_internet = 0.05;
-						salvar_cartão_de_crédito = 0.2;
-						salvar_poupança = 0.35;
-
-					}
-					if (vetor_renda_total[usuário_salário] > 10000) {
-
-						salvar_água = 0.04;
-						salvar_energia = 0.06;
-						salvar_alimentação = 0.2;
-						salvar_internet = 0.05;
-						salvar_cartão_de_crédito = 0.2;
-						salvar_poupança = 0.35;
+						salvarAgua = 0.04f;
+						salvarEnergia = 0.04f;
+						salvarAlimentacao = 0.2f;
+						salvarInternet = 0.05f;
+						salvarCredCard = 0.2f;
+						salvarPoupanca = 0.3f;
 
 					}
+					if (vetRendaT[usuarioPosicao] > 5000 && vetRendaT[usuarioPosicao] <= 7500) {
 
-					System.out.println("Olá " + usuário);
-					System.out.println(" ");
-					System.out.println("Esses são os gastos máximos que vê tem de acordo com o seu salário: ");
-					System.out.println(" ");
-					System.out.println("Água: " + (salvar_água * 100) + "%");
-					System.out.println("Energia: " + (salvar_energia * 100) + "%");
-					System.out.println("Alimentação: " + (salvar_alimentação * 100) + "%");
-					System.out.println("Internet: " + (salvar_internet * 100) + "%");
-					System.out.println("Cartão de crédito: " + (salvar_cartão_de_crédito * 100) + "%");
-					System.out.println("Poupança: " + (salvar_poupança * 100) + "%");
-					System.out.println(" ");
+						salvarAgua = 0.04f;
+						salvarEnergia = 0.06f;
+						salvarAlimentacao = 0.2f;
+						salvarInternet = 0.05f;
+						salvarCredCard = 0.2f;
+						salvarPoupanca = 0.3f;
 
+					}
+					if (vetRendaT[usuarioPosicao] > 7500 && vetRendaT[usuarioPosicao] <= 10000) {
+
+						salvarAgua = 0.04f;
+						salvarEnergia = 0.06f;
+						salvarAlimentacao = 0.2f;
+						salvarInternet = 0.05f;
+						salvarCredCard = 0.2f;
+						salvarPoupanca = 0.35f;
+
+					}
+					if (vetRendaT[usuarioPosicao] > 10000) {
+
+						salvarAgua = 0.04f;
+						salvarEnergia = 0.06f;
+						salvarAlimentacao = 0.2f;
+						salvarInternet = 0.05f;
+						salvarCredCard = 0.2f;
+						salvarPoupanca = 0.35f;
+
+					}
+					System.out.println("\n\n");
+					System.out.println(
+					 "//======================================================\\\\\n"
+					+"||	Percentuais recomendados para seu perfil	||\n"
+					+"||>====================================================<||\n"
+					+"||	Água: " + (salvarAgua * 100) + "% 					||\n"
+					+"||	Energia: " + (salvarEnergia * 100) + "% 					||\n"
+					+"||	Alimentação: " + (salvarAlimentacao * 100) + "%				||\n"
+					+"||	Internet: " + (salvarInternet * 100) + "%					||\n"
+					+"||	Cartão de crédito: " + (salvarCredCard * 100) + "% 			||\n"
+					+"||	Poupança: " + (salvarPoupanca * 100) + "% 				||\n"
+					+"\\\\======================================================//");
+					
+
+					System.out.print(
+							 "+---------------------------------------+\n"
+							+"|	Tecle [ENTER] para voltar 	|\n"
+							+"+---------------------------------------+");
+					voltar = scan.nextLine();
+					voltar = scan.nextLine();
+					
+					
 					break;
 
 				case 2:
 
 					percentual = 100;
-
-					System.out.println("PLANO PERSONALIZADO");
-					System.out.println("Selecione o percentual desejado para cada item a seguir: ");
-					System.out.println("Por padrão do sistema, o percentual máximo é de 60%!");
-
-					do {
-						do {
-							System.out.println("Água: ");
-							percentual_água = scan.nextDouble();
-							if (percentual_água < 0 || percentual_água > 60) {
-								System.out.println("Percentual inválido, tente novamente!");
-							}
-						} while (percentual_água < 0 || percentual_água > 60);
-						cálculo_plano_personalizado(percentual_água);
-					} while (confirmação_p_person != 0);
+					System.out.println("\n\n");
+					System.out.println(
+					 "//===============================================================\\\\\n"
+					+"||			PLANO PERSONALIZADO			 ||\n"
+					+"||>=============================================================<||\n"
+					+"||	Digite o percentual desejado para cada item a seguir! 	 ||\n"
+					+"||	Por padrão do sistema, o percentual máximo permitido   	 ||\n"
+					+"||	de um item é de até 60%!				 ||\n"
+					+"\\\\===============================================================//");
+					System.out.println("\n");
 
 					do {
 						do {
-							System.out.println("Energia: ");
-							percentual_energia = scan.nextDouble();
-
-							if (percentual_energia < 0 || percentual_energia > 60) {
-								System.out.println("Percentual inválido, tente novamente!");
+						
+							System.out.print(
+									 "+-----------+\n"
+									+"|   Água    |\n"
+									+"+-----------+\n"
+									+"=>");
+						
+							percAgua = scan.nextFloat();
+							if (percAgua < 0 || percAgua > 60) {
+								
+								System.out.println(
+										 "#=======================================#\n"
+										+"| Percentual inválido, tente novamente! |\n"
+										+"#=======================================#");
+						
 							}
-						} while (percentual_energia < 0 || percentual_energia > 60);
-						cálculo_plano_personalizado(percentual_energia);
-					} while (confirmação_p_person != 0);
+						} while (percAgua < 0 || percAgua > 60);
+						cálculo_plano_personalizado(percAgua);
+					} while (confirmarPlanoPers != 0);
 
 					do {
 						do {
-							System.out.println("Alimentação: ");
-							percentual_alimentação = scan.nextDouble();
+						
+							System.out.print(
+									 "+---------------+\n"
+									+"|    Energia    |\n"
+									+"+---------------+\n"
+									+"=>");
+						
+							percEnergia = scan.nextFloat();
 
-							if (percentual_alimentação < 0 || percentual_alimentação > 60) {
-								System.out.println("Percentual inválido, tente novamente!");
+							if (percEnergia < 0 || percEnergia > 60) {
+							
+								System.out.println(
+										 "#=======================================#\n"
+										+"| Percentual inválido, tente novamente! |\n"
+										+"#=======================================#");
+							
 							}
-						} while (percentual_alimentação < 0 || percentual_alimentação > 60);
-						cálculo_plano_personalizado(percentual_alimentação);
-					} while (confirmação_p_person != 0);
+						} while (percEnergia < 0 || percEnergia > 60);
+						cálculo_plano_personalizado(percEnergia);
+					} while (confirmarPlanoPers != 0);
 
 					do {
 						do {
-							System.out.println("Internet: ");
-							percentual_internet = scan.nextDouble();
+						
+							System.out.print(
+									 "+-------------------+\n"
+									+"|    Alimentação    |\n"
+									+"+-------------------+\n"
+									+"=>");
+							
+							percAlimentacao = scan.nextFloat();
 
-							if (percentual_internet < 0 || percentual_internet > 60) {
-								System.out.println("Percentual inválido, tente novamente!");
+							if (percAlimentacao < 0 || percAlimentacao > 60) {
+							
+								System.out.println(
+										 "#=======================================#\n"
+										+"| Percentual inválido, tente novamente! |\n"
+										+"#=======================================#");
+							
 							}
-						} while (percentual_internet < 0 || percentual_internet > 60);
-						cálculo_plano_personalizado(percentual_internet);
-					} while (confirmação_p_person != 0);
+						} while (percAlimentacao < 0 || percAlimentacao > 60);
+						cálculo_plano_personalizado(percAlimentacao);
+					} while (confirmarPlanoPers != 0);
 
 					do {
 						do {
-							System.out.println("Cartão de crédito: ");
-							percentual_cartão_de_crédito = scan.nextDouble();
+							
+							System.out.print(
+									 "+---------------+\n"
+									+"|    Internet   |\n"
+									+"+---------------+\n"
+									+"=>");
+						
+							percInternet = scan.nextFloat();
 
-							if (percentual_cartão_de_crédito < 0 || percentual_cartão_de_crédito > 60) {
-								System.out.println("Percentual inválido, tente novamente!");
+							if (percInternet < 0 || percInternet > 60) {
+							
+								System.out.println(
+										 "#=======================================#\n"
+										+"| Percentual inválido, tente novamente! |\n"
+										+"#=======================================#");
+						
 							}
-						} while (percentual_cartão_de_crédito < 0 || percentual_cartão_de_crédito > 60);
-						cálculo_plano_personalizado(percentual_cartão_de_crédito);
-					} while (confirmação_p_person != 0);
+						} while (percInternet < 0 || percInternet > 60);
+						cálculo_plano_personalizado(percInternet);
+					} while (confirmarPlanoPers != 0);
 
 					do {
 						do {
-							System.out.println("Poupança: ");
-							percentual_poupança = scan.nextDouble();
+						
+							System.out.print(
+									 "+-------------------------+\n"
+									+"|    Cartão de crédito    |\n"
+									+"+-------------------------+\n"
+									+"=>");
+							
+							percCredCard = scan.nextFloat();
 
-							if (percentual_poupança < 0 || percentual_poupança > 60) {
-								System.out.println("Percentual inválido, tente novamente!");
+							if (percCredCard < 0 || percCredCard > 60) {
+							
+								System.out.println(
+										 "#=======================================#\n"
+										+"| Percentual inválido, tente novamente! |\n"
+										+"#=======================================#");
+							
 							}
-						} while (percentual_poupança < 0 || percentual_poupança > 60);
-						cálculo_plano_personalizado(percentual_poupança);
-					} while (confirmação_p_person != 0);
+						} while (percCredCard < 0 || percCredCard > 60);
+						cálculo_plano_personalizado(percCredCard);
+					} while (confirmarPlanoPers != 0);
 
-					System.out.println("Configuração do plano: \n");
-					System.out.println("Água: " + percentual_água + "%");
-					System.out.println("Energia: " + percentual_energia + "%");
-					System.out.println("Alimentação: " + percentual_alimentação + "%");
-					System.out.println("Internet: " + percentual_internet + "%");
-					System.out.println("Cartão de crédito: " + percentual_cartão_de_crédito + "%");
-					System.out.println("Poupança: " + percentual_poupança + "% \n");
+					do {
+						do {
+							
+							System.out.print(
+									 "+----------------+\n"
+									+"|    Poupança    |\n"
+									+"+----------------+\n"
+									+"=>");
+							
+							percPoupanca = scan.nextFloat();
 
-					System.out.println("Continuar? (S/N)");
-					continuar_p_person = scan.next();
+							if (percPoupanca < 0 || percPoupanca > 60) {
+								
+								System.out.println(
+										 "#=======================================#\n"
+										+"| Percentual inválido, tente novamente! |\n"
+										+"#=======================================#");
+							
+							}
+						} while (percPoupanca < 0 || percPoupanca > 60);
+						cálculo_plano_personalizado(percPoupanca);
+					} while (confirmarPlanoPers != 0);
 
-					//////////////////////////////////
+					System.out.println("\n\n");
+					System.out.println(
+							 "//==============================================\\\\\n"
+							+"||		Configuração do plano 		||\n"
+							+"||>============================================<||\n"
+							+"||						||\n"
+							+"||		Água: " + percAgua + "%			||\n"
+							+"||		Energia: " + percEnergia + "%			||\n"
+							+"||		Alimentação: " + percAlimentacao + "%		||\n"
+							+"||		Internet: " + percInternet + "%			||\n"
+							+"||		Cartão de Créd.: " + percCredCard + "%		||\n"
+							+"||		Poupança: " + percPoupanca + "%			||\n"
+							+"||						||\n"
+							+"\\\\==============================================//");
 
-					// SWITCH de confirmação de plano
-					switch (continuar_p_person) {
-					case "S":
-
-						// salvar_configuração();
-
-						salvar_água = percentual_água;
-						salvar_alimentação = percentual_alimentação;
-						salvar_cartão_de_crédito = percentual_cartão_de_crédito;
-						salvar_energia = percentual_energia;
-						salvar_internet = percentual_internet;
-						salvar_poupança = percentual_poupança;
-
-						System.out.println("Plano configurado com sucesso!");
-
-						break;
-					case "N":
-						percentual_água = salvar_água;
-						percentual_energia = salvar_energia;
-						percentual_alimentação = salvar_alimentação;
-						percentual_internet = salvar_internet;
-						percentual_cartão_de_crédito = salvar_cartão_de_crédito;
-						percentual_poupança = salvar_poupança;
-
-						System.out.println("Alterações canceladas pelo usuário!");
-
-						break;
-
-					default:
-						System.out.println("Opção incorreta, por favor tente novamente!");
-
-						break;
+					do {
+					
+					System.out.print(
+							 "+-----------------------+\n"
+							+"|   Continuar? (S/N)    |\n"
+							+"+-----------------------+\n"
+							+ "=>");
+					
+					continuarPlanoPers = scan.next();
+					
+					
+						if (!continuarPlanoPers.equalsIgnoreCase("S") && (!continuarPlanoPers.equalsIgnoreCase("N"))) {
+						
+							
+							System.out.println(
+									 "+-------------------------------------------------------+\n"
+									+"|	Opção incorreta, por favor tente novamente!	|\n"
+									+"+-------------------------------------------------------+");
 					}
 
+						
+					}while(!continuarPlanoPers.equalsIgnoreCase("S") && (!continuarPlanoPers.equalsIgnoreCase("N")));
+					
+					
+					if (continuarPlanoPers.equalsIgnoreCase("S")) {
+						
+						salvarAgua = percAgua/100;
+						salvarAlimentacao = percAlimentacao/100;
+						salvarCredCard = percCredCard/100;
+						salvarEnergia = percEnergia/100;
+						salvarInternet = percInternet/100;
+						salvarPoupanca = percPoupanca/100;
+
+						System.out.println(
+								 "#=======================================#\n"
+								+"|	Plano configurado com sucesso!	|\n"
+								+"#=======================================#");
+						
+					}
+					if (continuarPlanoPers.equalsIgnoreCase("N")) {
+						
+						percAgua = salvarAgua;
+						percEnergia = salvarEnergia;
+						percAlimentacao = salvarAlimentacao;
+						percInternet = salvarInternet;
+						percCredCard = salvarCredCard;
+						percPoupanca = salvarPoupanca;
+
+						System.out.println(
+								 "#===============================================#\n"
+								+"|	Alterações canceladas pelo usuário!	|\n"
+								+"#===============================================#");
+						
+						
+					}
+					
+
+					System.out.print(
+							 "+---------------------------------------+\n"
+							+"|	Tecle [ENTER] para voltar 	|\n"
+							+"+---------------------------------------+");
+					voltar = scan.nextLine();
+					voltar = scan.nextLine();
+					
+					
 					break;
 
 				case 3:
-					
-					if (salvar_água==0) {
-						System.out.println("Para exibir seu primeiro relatório, verifique seu plano atual");
-					}else {
-					
+
+					if (salvarAgua == 0) {
+						System.out.println(
+								 "#=====================================================================================#\n"
+								+"|    Para exibir seu primeiro relatório, primeiro verifique seu plano recomendado!    |\n"    
+								+"#=====================================================================================#");
 						
-					double vAgua = 	(vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário]*salvar_água)));
-					double vEnergia = 	(vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário]*salvar_energia)));
-					double vAlimentacao = 	(vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário]*salvar_alimentação)));
-					double vInternet = 	(vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário]*salvar_internet)));
-					double vCredCard = 	(vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário]*salvar_cartão_de_crédito)));
-					double vPoupanca = 	(vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário] - (vetor_renda_total[usuário_salário]*salvar_poupança)));
-					double vTotal = vAgua+vEnergia+vAlimentacao+vInternet+vCredCard+vPoupanca;
+							
+
+						System.out.print(
+								 "+---------------------------------------+\n"
+								+"|	Tecle [ENTER] para voltar 	|\n"
+								+"+---------------------------------------+");
+						voltar = scan.nextLine();
+						voltar = scan.nextLine();
+						
+					} else {
+
+						vAgua = (vetRendaT[usuarioPosicao] - (vetRendaT[usuarioPosicao]
+								- (vetRendaT[usuarioPosicao] * salvarAgua)));
+						vEnergia = (vetRendaT[usuarioPosicao] - (vetRendaT[usuarioPosicao]
+								- (vetRendaT[usuarioPosicao] * salvarEnergia)));
+						vAlimentacao = (vetRendaT[usuarioPosicao] - (vetRendaT[usuarioPosicao]
+								- (vetRendaT[usuarioPosicao] * salvarAlimentacao)));
+						vInternet = (vetRendaT[usuarioPosicao] - (vetRendaT[usuarioPosicao]
+								- (vetRendaT[usuarioPosicao] * salvarInternet)));
+						vCredCard = (vetRendaT[usuarioPosicao] - (vetRendaT[usuarioPosicao]
+								- (vetRendaT[usuarioPosicao] * salvarCredCard)));
+						vPoupanca = (vetRendaT[usuarioPosicao] - (vetRendaT[usuarioPosicao]
+								- (vetRendaT[usuarioPosicao] * salvarPoupanca)));
+						vTotal = vAgua + vEnergia + vAlimentacao + vInternet + vCredCard + vPoupanca;
+
+						System.out.println("\n\n");
+						System.out.println(
+								"//======================================\\\\\n"
+								+"||		RELATÓRIO 		||\n"
+								+"||>====================================<||\n"
+								+"||	Nome: "+vetNome[usuarioPosicao]+"			||\n"
+								+"||	Data Nasc.: "+vetData[usuarioPosicao]+" 		||\n"
+								+"||	Renda total no mês: "+vetRendaT[usuarioPosicao]+"	||\n"				
+								+"||>------------------------------------<||");
+						
+						System.out.printf("||	Água: R$%.2f			||%n" , vAgua);
+						System.out.printf("||	Energia: R$%.2f 		||%n" , vEnergia);
+						System.out.printf("||	Alimentação: R$%.2f 		||%n" , vAlimentacao);
+						System.out.printf("||	Internet: R$%.2f 		||%n" , vInternet);
+						System.out.printf("||	Cartão de crédito: R$%.2f 	||%n" , vCredCard);
+						System.out.printf("||	Poupança: R$%.2f 		||%n" , vPoupanca);
+						System.out.printf("||	Total de gastos: R$%.2f	||%n" , vTotal);
+						System.out.printf("||	Renda restante: R$%.2f	||%n" , (vetRendaT[usuarioPosicao] - vTotal));
+						System.out.println("\\\\======================================//");
+					
+						System.out.print(
+								 "+---------------------------------------+\n"
+								+"|	Tecle [ENTER] para voltar 	|\n"
+								+"+---------------------------------------+");
+						voltar = scan.nextLine();
+						voltar = scan.nextLine();
+						
 					
 					
-					System.out.println("Exibindo relatório...");
-					
-					System.out.println("Gastos máximos permitido:");
-					System.out.println("Água: R$"+vAgua);
-					System.out.println("Energia: R$"+vEnergia);
-					System.out.println("Alimentação: R$"+vAlimentacao);
-					System.out.println("Internet: R$"+vInternet);
-					System.out.println("Cartão de crédito: R$"+vCredCard);
-					System.out.println("Poupança: R$"+vPoupanca);
-					System.out.println("Total de gastos: R$"+vTotal);
-					System.out.println("Renda restante: R$"+(vetor_renda_total[usuário_salário]-vTotal));
 					}
+					
+					break;
+					
+				case 0: 
+					opcao2=0;
 					break;
 				default:
 
-					System.out.println("Opção incorreta, por favor tente novamente!");
+					System.out.println(
+							 "+-------------------------------------------------------+\n"
+							+"|	Opção incorreta, por favor tente novamente!	|\n"
+							+"+-------------------------------------------------------+");
 					break;
 
 				}
 
+				}while(opcao2!=0);
+				}while(opcao2!=0);
 				break;
 
 			case 3:
 
-				System.out.println("==============================================================");
-				System.out.println("			Sistema Econômico pessoal (SEP)\n\n"
-						+ "O SEP foi criado com a finalidade de facilitar o gerenciamento de gastos mensal, \n"
-						+ "com planos de economia baseados no perfil do usuário. Nele você pode realizar um\n"
-						+ "cadastro com seus dados pessoais e, após uma rápida análise do perfil cadastrado,\n"
-						+ "o programa mostrará a configuração de plano econômico mais adequada para você. Nesta\n"
-						+ "configuração serão apresentados valores máximos para cada gasto (água, energia, etc)\n"
-						+ "onde este valor representa o limite máximo de gasto que você pode efetuar para que o\n"
-						+ "controle econômico aconteça. Além disso, independentemente do perfil do usuário, o\n"
-						+ "plano econômico que for configurado contará com uma poupança, onde sempre será recomendado\n"
-						+ "ao usuário separar uma parte da renda mensal para uma poupança. Para usuários mais \n"
-						+ "experientes em controles financeiros e que queira usar o programa apenas para monitorar\n"
-						+ "seus gastos, há a opção de plano personalizado para que ele mesmo altere os parâmetros\n"
-						+ "de percentual de gastos de seu plano.\n\n");
+				System.out.println("\n\n");
+				System.out.println(
+						  "//======================================================================================================\\\\\n"
+						+ "||			Sistema Econômico pessoal (SEP)							||\n"
+						+ "||													||\n"
+						+ "||	O SEP foi criado com a finalidade de facilitar o gerenciamento de gastos mensal			||\n"
+						+ "||	com planos de economia baseados no perfil do usuário. Nele você pode realizar um		||\n"
+						+ "||	cadastro com seus dados pessoais e, após uma rápida análise do perfil cadastrado,		||\n"	
+						+ "||	o programa mostrará a configuração de plano econômico mais adequada para você. Nesta		||\n"
+						+ "||	configuração serão apresentados valores máximos para cada gasto (água, energia, etc)		||\n"
+						+ "||	onde este valor representa o limite máximo de gasto que você pode efetuar para que o		||\n"
+						+ "||	controle econômico aconteça. Além disso, independentemente do perfil do usuário, o		||\n"
+						+ "||	plano econômico que for configurado contará com uma poupança, onde sempre será 	 		||\n"
+						+ "||	recomendado ao usuário separar uma parte da renda mensal para uma poupança. Para usuários	||\n"
+						+ "||	mais experientes em controles financeiros e que queira usar o programa apenas para 	 	||\n"
+						+ "||	monitorar seus gastos, há a opção de plano personalizado para que ele mesmo altere os		||\n"
+						+ "||	parâmetros de percentual de gastos de seu plano. Há ainda, uma área de relatório onde		||\n"
+						+ "||	mostrará os valores em reais equivalente a quanto o usuário poderá gastar para continuar	||\n"
+						+ "||	no limite máximo economizando seu dinheiro.							||\n"
+						+ "||													||\n"
+						+ "\\\\======================================================================================================//");
 
+				System.out.print(
+						 "+---------------------------------------+\n"
+						+"|	Tecle [ENTER] para voltar 	|\n"
+						+"+---------------------------------------+");
+				voltar = scan.nextLine();
+				voltar = scan.nextLine();
+				
+				break;
+			
+			case 0:	
+				opcao1=0;
+				break;
+				
+				
+			default:
+
+				System.out.println(
+						 "+-------------------------------------------------------+\n"
+						+"|	Opção incorreta, por favor tente novamente!	|\n"
+						+"+-------------------------------------------------------+");
+				break;	
 			}
 
-		} while (opção != 0);
+		} while (opcao1 != 0);
 
-		if (opção == 0) {
-			System.out.println("PROGRAMA FINALIZADO PELO USUÁRIO");
+		
+		
+			
+		
+		if (opcao1 == 0) {
+			System.out.println(
+					 "+-----------------------------------------------+\n"
+					+"|	 PROGRAMA FINALIZADO PELO USUÁRIO	|\n"
+					+"+-----------------------------------------------+");
 		}
 
 	}
 
-	///////////////////////////// MÉTODOS //////////////////////////////////
+	// Método para calcular restante de percentuais
 
 	static double percentual;
-
+	static int confirmarPlanoPers = 1;
+	
 	public static void cálculo_plano_personalizado(double x) {
 
 		if (x <= percentual) {
 			percentual = percentual - x;
-			confirmação_p_person = 0;
-			System.out.println("Pontos percentuais restantes a serem distribuídos = " + percentual + "%");
+			confirmarPlanoPers = 0;
+			
+			System.out.println(
+					 "#=======================================================================#\n"
+					+"|	Pontos percentuais restantes a serem distribuídos = " + percentual + "%	|\n"
+					+"#=======================================================================#");
+		
+		
 		} else {
-			confirmação_p_person = 1;
-			System.out.println("valor não pode ser aceitado pois não há "
-					+ " pontos percentuais suficientes a serem distribuídos (Restam " + percentual + "%)");
+			confirmarPlanoPers = 1;
+			System.out.println(
+					 "#===============================================================#\n"
+					+"|	Valor não pode ser aceitado pois não há                 |\n"
+					+"|	pontos percentuais suficientes a serem distribuídos     |\n"
+					+"|	Restam " + percentual + "%						|\n"
+					+"#===============================================================#");
 
 		}
 	}
 
-	static int confirmação_p_person = 1;
-
-	public static void salvar_configuração() {
-
-		/*
-		 * salvar_água=percentual_água; salvar_alimentação=percentual_alimentação;
-		 * salvar_cartão_de_crédito=percentual_cartão_de_crédito;
-		 * salvar_energia=percentual_energia; salvar_internet=percentual_internet;
-		 * salvar_poupança=percentual_poupança;
-		 */
-	}
+	
+	
 
 }
